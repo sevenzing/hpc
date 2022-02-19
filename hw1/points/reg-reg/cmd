@@ -1,0 +1,2 @@
+set title "Regular matrix-matrix multiplication"
+plot 'points/reg-reg/1-cores' title 'serial execution' with lines, 'points/reg-reg/2-cores' title '2-cores' with lines, 'points/reg-reg/4-cores' title '4-cores' with lines, 'points/reg-reg/8-cores' title '8-cores' with lines

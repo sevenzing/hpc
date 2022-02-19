@@ -1,0 +1,4 @@
+set title "Regular matrix-vector multiplication on GPU.\nIntel(R) Iris(R) Xe Graphics [512 cores]"
+set xlabel 'N - Matrix size' 
+set ylabel 'time (s)'
+plot 'points/gpu/reg' title 'Regular matrix' with lines, 'points/gpu/crs' title 'Crs matrix' with lines
