@@ -29,7 +29,9 @@ x axis is Matrix size, y axis is time in seconds
 
 Code can be found here:
 
-https://github.com/sevenzing/hpc/tree/master/hw1
+[https://github.com/sevenzing/hpc/tree/master/hw1](https://github.com/sevenzing/hpc/tree/master/hw1)
+
+Also note that I use `vector.h` library - implementation of vector in C by Ivan Rybin @i1i1r
 
 
 # Program output
