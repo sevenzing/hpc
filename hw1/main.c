@@ -932,151 +932,151 @@ int main(void) {
     free(ids);
     // Task 1-3 end
     
-    // // Task 12
-    // printf("\nTask 12. Checking matrix multiplication\n");
-    // int sizes[] = {1e1, 1e2, 1e3};
-    // foreach(int *n, sizes) {
-    //     float time;
-    //     crsMatrix cm = newCrsSpecial(seed, *n, *n / 10);
-    //     regMatrix rm = regFromCrs(&cm);
+    // Task 12
+    printf("\nTask 12. Checking matrix multiplication\n");
+    int sizes[] = {1e1, 1e2, 1e3};
+    foreach(int *n, sizes) {
+        float time;
+        crsMatrix cm = newCrsSpecial(seed, *n, *n / 10);
+        regMatrix rm = regFromCrs(&cm);
 
-    //     vector_decl(float, x);
-    //     for (int i = 0; i < *n; i++){
-    //         vector_push(&x, *n / 2 - i);
-    //     }
-    //     vector_decl(float, crs_result);
-    //     crsMultVector(&cm, &x, &crs_result, &time);
+        vector_decl(float, x);
+        for (int i = 0; i < *n; i++){
+            vector_push(&x, *n / 2 - i);
+        }
+        vector_decl(float, crs_result);
+        crsMultVector(&cm, &x, &crs_result, &time);
 
-    //     vector_decl(float, reg_result);
-    //     regMultVector(&rm, &x, &reg_result, &time);
+        vector_decl(float, reg_result);
+        regMultVector(&rm, &x, &reg_result, &time);
         
-    //     printf("For n = %d: ", *n);
-    //     if (compareVectors(&crs_result, &reg_result, *n) == 0){
-    //         printf("correct");
-    //     } else{
-    //         printf("incorrect");
-    //     }
-    //     printf("\n");
-    // }
+        printf("For n = %d: ", *n);
+        if (compareVectors(&crs_result, &reg_result, *n) == 0){
+            printf("correct");
+        } else{
+            printf("incorrect");
+        }
+        printf("\n");
+    }
 
-    // // Task 14.
-    // printf("\nRegular matrix-vector multiplication serials:\n");
-    // //stdout = fopen("points/reg-vec/1-cores", "w");
-    // testRegMulVector();
-    // //fclose(stdout);
-    // //stdout = saved_stdout;
+    // Task 14.
+    printf("\nRegular matrix-vector multiplication serials:\n");
+    //stdout = fopen("points/reg-vec/1-cores", "w");
+    testRegMulVector();
+    //fclose(stdout);
+    //stdout = saved_stdout;
 
-    // for (int cores = 2; cores <= 8; cores *= 2) {
-    //     printf("\nRegular matrix-vector multiplication with OMP with %d core(s):\n", cores);
-    //     omp_set_num_threads(cores);
-    //     testRegMulVectorOmp();
-    // }
+    for (int cores = 2; cores <= 8; cores *= 2) {
+        printf("\nRegular matrix-vector multiplication with OMP with %d core(s):\n", cores);
+        omp_set_num_threads(cores);
+        testRegMulVectorOmp();
+    }
     
-    // // Task 16.
-    // printf("\nCrs matrix-vector multiplication serials:\n");
-    // testCrsMulVector();
+    // Task 16.
+    printf("\nCrs matrix-vector multiplication serials:\n");
+    testCrsMulVector();
 
-    // for (int cores = 2; cores <= 8; cores *= 2) {
-    //     printf("\nCrs matrix-vector multiplication with OMP with %d core(s):\n", cores);
-    //     omp_set_num_threads(cores);
-    //     testCrsMulVectorOmp();
-    // }
+    for (int cores = 2; cores <= 8; cores *= 2) {
+        printf("\nCrs matrix-vector multiplication with OMP with %d core(s):\n", cores);
+        omp_set_num_threads(cores);
+        testCrsMulVectorOmp();
+    }
 
-    // // Task 19.
-    // printf("\nCheck crs-crs and regular-regular matrix mult\n");
-    // for (int n = 10; n <= 1000; n *= 10){
-    //     crsMatrix cm_1 = newCrsSpecial(seed, n, 2);
-    //     crsMatrix cm_2 = newCrsSpecial(seed, n, 2);
+    // Task 19.
+    printf("\nCheck crs-crs and regular-regular matrix mult\n");
+    for (int n = 10; n <= 1000; n *= 10){
+        crsMatrix cm_1 = newCrsSpecial(seed, n, 2);
+        crsMatrix cm_2 = newCrsSpecial(seed, n, 2);
 
-    //     regMatrix rm_1 = regFromCrs(&cm_1);
-    //     regMatrix rm_2 = regFromCrs(&cm_2);
+        regMatrix rm_1 = regFromCrs(&cm_1);
+        regMatrix rm_2 = regFromCrs(&cm_2);
     
-    //     float time;
-    //     regMatrix rm_o = regMulReg(rm_1, rm_2, &time);
-    //     crsMatrix cm_o = crsMulCrs(cm_1, cm_2, &time);
+        float time;
+        regMatrix rm_o = regMulReg(rm_1, rm_2, &time);
+        crsMatrix cm_o = crsMulCrs(cm_1, cm_2, &time);
 
-    //     int res = checkEq(cm_o, rm_o);
-    //     if (res == 0) {
-    //         printf("For n=%d is ok\n", n);
-    //     }
-    // }
+        int res = checkEq(cm_o, rm_o);
+        if (res == 0) {
+            printf("For n=%d is ok\n", n);
+        }
+    }
 
-    // // Task 21.
-    // printf("\nRegular matrix-matrix multiplication serial:\n");
-    // testRegMulReg();
-    // for (int cores = 2; cores <= 8; cores *= 2) {
-    //     printf("\nRegular matrix-matrix multiplication with OMP with %d core(s):\n", cores);
-    //     omp_set_num_threads(cores);
-    //     testRegMulRegOmp();
-    // }
+    // Task 21.
+    printf("\nRegular matrix-matrix multiplication serial:\n");
+    testRegMulReg();
+    for (int cores = 2; cores <= 8; cores *= 2) {
+        printf("\nRegular matrix-matrix multiplication with OMP with %d core(s):\n", cores);
+        omp_set_num_threads(cores);
+        testRegMulRegOmp();
+    }
 
-    // //Task 23.
-    // printf("\nCrs matrix-matrix multiplication serial:\n");
-    // testCrsMulCrs();
-    // for (int cores = 2; cores <= 8; cores *= 2) {
-    //     printf("\nCrs matrix-matrix multiplication with OMP with %d core(s):\n", cores);
-    //     omp_set_num_threads(cores);
-    //     testCrsMulCrsOmp();
-    // }
+    //Task 23.
+    printf("\nCrs matrix-matrix multiplication serial:\n");
+    testCrsMulCrs();
+    for (int cores = 2; cores <= 8; cores *= 2) {
+        printf("\nCrs matrix-matrix multiplication with OMP with %d core(s):\n", cores);
+        omp_set_num_threads(cores);
+        testCrsMulCrsOmp();
+    }
 
 
-    // printf("\nTask 25. Checking matrix multiplication on GPU\n"); 
-    // for (int n = 10; n <= 1000; n *= 10) {
-    //     float time;
-    //     crsMatrix cm = newCrsSpecial(seed, n, 2);
-    //     regMatrix rm = regFromCrs(&cm);
+    printf("\nTask 25. Checking matrix multiplication on GPU\n"); 
+    for (int n = 10; n <= 1000; n *= 10) {
+        float time;
+        crsMatrix cm = newCrsSpecial(seed, n, 2);
+        regMatrix rm = regFromCrs(&cm);
 
-    //     vector_decl(float, x);
-    //     for (int i = 0; i < n; i++){
-    //         vector_push(&x, n / 2 - i);
-    //     }
-    //     vector_decl(float, gpu_result);
-    //     gpu_result = regMulVecGpu(rm, x, &time);
+        vector_decl(float, x);
+        for (int i = 0; i < n; i++){
+            vector_push(&x, n / 2 - i);
+        }
+        vector_decl(float, gpu_result);
+        gpu_result = regMulVecGpu(rm, x, &time);
 
-    //     vector_decl(float, reg_result);
-    //     regMultVector(&rm, &x, &reg_result, &time);
+        vector_decl(float, reg_result);
+        regMultVector(&rm, &x, &reg_result, &time);
         
-    //     printf("For n = %d: ", n);
-    //     float diff = compareVectors(&gpu_result, &reg_result, n);
-    //     if (fabs(diff) < ZERO_IN_REG){
-    //         printf("correct");
-    //     } else{
-    //         printf("incorrect: %f", diff);
-    //     }
-    //     printf("\n");
-    // }
+        printf("For n = %d: ", n);
+        float diff = compareVectors(&gpu_result, &reg_result, n);
+        if (fabs(diff) < ZERO_IN_REG){
+            printf("correct");
+        } else{
+            printf("incorrect: %f", diff);
+        }
+        printf("\n");
+    }
 
     
-    // printf("\nReg matrix-vector multiplication on GPU:\n");
-    // testRegMulVecGpu();
+    printf("\nReg matrix-vector multiplication on GPU:\n");
+    testRegMulVecGpu();
 
-    // printf("\nTask 28. Checking CRS matrix multiplication on GPU\n"); 
-    // for (int n = 10; n <= 1000; n *= 10) {
-    //     float time;
-    //     crsMatrix cm = newCrsSpecial(seed, n, 2);
-    //     regMatrix rm = regFromCrs(&cm);
+    printf("\nTask 28. Checking CRS matrix multiplication on GPU\n"); 
+    for (int n = 10; n <= 1000; n *= 10) {
+        float time;
+        crsMatrix cm = newCrsSpecial(seed, n, 2);
+        regMatrix rm = regFromCrs(&cm);
 
-    //     vector_decl(float, x);
-    //     for (int i = 0; i < n; i++){
-    //         vector_push(&x, n / 2 - i);
-    //     }
-    //     vector_of(float) gpu_result = crsMulVecGpu(cm, x, &time);
+        vector_decl(float, x);
+        for (int i = 0; i < n; i++){
+            vector_push(&x, n / 2 - i);
+        }
+        vector_of(float) gpu_result = crsMulVecGpu(cm, x, &time);
 
-    //     vector_decl(float, reg_result);
-    //     regMultVector(&rm, &x, &reg_result, &time);
+        vector_decl(float, reg_result);
+        regMultVector(&rm, &x, &reg_result, &time);
         
-    //     printf("For n = %d: ", n);
-    //     float diff = compareVectors(&gpu_result, &reg_result, n);
-    //     if (fabs(diff) < ZERO_IN_REG){
-    //         printf("correct");
-    //     } else{
-    //         printf("incorrect: %f", diff);
-    //     }
-    //     printf("\n");
-    // }
+        printf("For n = %d: ", n);
+        float diff = compareVectors(&gpu_result, &reg_result, n);
+        if (fabs(diff) < ZERO_IN_REG){
+            printf("correct");
+        } else{
+            printf("incorrect: %f", diff);
+        }
+        printf("\n");
+    }
 
-    // printf("\nCrs matrix-vector multiplication on GPU:\n");    
-    // testCrsMulVecGpu();
+    printf("\nCrs matrix-vector multiplication on GPU:\n");    
+    testCrsMulVecGpu();
 
 
     printf("\nTask 28. Checking CRS matrix multiplication on GPU\n"); 
