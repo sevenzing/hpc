@@ -1,4 +1,4 @@
-Report for homework #1 of HPC course
+Lymarenko Lev Programming assignment #1
 ===
 
 # Graphs
